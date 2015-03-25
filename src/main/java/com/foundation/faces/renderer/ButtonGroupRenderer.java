@@ -3,15 +3,13 @@ package com.foundation.faces.renderer;
 import com.foundation.faces.component.ButtonComponent;
 import com.foundation.faces.component.ButtonGroupComponent;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.StringJoiner;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.FacesRenderer;
 import javax.faces.render.Renderer;
-import org.apache.commons.lang.StringUtils;
 
 /**
  *
@@ -26,7 +24,7 @@ public class ButtonGroupRenderer extends Renderer {
         ButtonGroupComponent buttonGroupComponent = (ButtonGroupComponent) component;
         writer.startElement("ul", component);
         writer.writeAttribute("class", buildStyleClass(buttonGroupComponent), "styleClass");
-        if(buttonGroupComponent.getStyle() != null){
+        if (buttonGroupComponent.getStyle() != null) {
             writer.writeAttribute("style", buttonGroupComponent.getStyle(), "style");
         }
     }
@@ -36,8 +34,8 @@ public class ButtonGroupRenderer extends Renderer {
         ResponseWriter writer = context.getResponseWriter();
         List<UIComponent> innerComponents = component.getChildren();
         ButtonRenderer buttonRenderer = new ButtonRenderer();
-        for(UIComponent innerComponent : innerComponents){
-            if(innerComponent instanceof ButtonComponent){
+        for (UIComponent innerComponent : innerComponents) {
+            if (innerComponent instanceof ButtonComponent) {
                 writer.startElement("li", null);
                 buttonRenderer.encodeBegin(context, (ButtonComponent) innerComponent);
                 buttonRenderer.encodeEnd(context, (ButtonComponent) innerComponent);
@@ -51,17 +49,17 @@ public class ButtonGroupRenderer extends Renderer {
         ResponseWriter writer = context.getResponseWriter();
         writer.endElement("ul");
     }
-    
+
     private String buildStyleClass(ButtonGroupComponent component) {
-        List<String> styleClasses = new ArrayList<>();
+        StringJoiner styleClasses = new StringJoiner(" ");
         styleClasses.add("button-group");
-        if(component.getStyleClass() != null){
-            styleClasses.addAll(Arrays.asList(component.getStyleClass().split(" ")));
+        if (component.getStyleClass() != null) {
+            styleClasses.add(component.getStyleClass());
         }
         if (component.isStackEnabled() != null && component.isStackEnabled()) {
-            if(component.getStackType() == null || component.getStackType().equals("stack")){
+            if (component.getStackType() == null || component.getStackType().equals("stack")) {
                 styleClasses.add("stack");
-            } else if(component.getStackType().equals("stackForSmall")){
+            } else if (component.getStackType().equals("stackForSmall")) {
                 styleClasses.add("stack-for-small");
             }
             if (component.getEven() != null && component.getEven().matches("even-[1-8]")) {
@@ -74,13 +72,12 @@ public class ButtonGroupRenderer extends Renderer {
                 styleClasses.add(component.getCorner());
             }
         }
-        return StringUtils.join(styleClasses, ' ');
+        return styleClasses.toString();
     }
 
     @Override
     public boolean getRendersChildren() {
         return true;
     }
-    
-    
+
 }
