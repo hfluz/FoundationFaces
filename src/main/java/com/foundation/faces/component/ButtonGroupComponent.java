@@ -3,7 +3,7 @@ package com.foundation.faces.component;
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.FacesComponent;
-import javax.faces.component.UICommand;
+import javax.faces.component.UIPanel;
 
 /**
  *
@@ -12,38 +12,38 @@ import javax.faces.component.UICommand;
 @ResourceDependencies({
     @ResourceDependency(library = "foundation", name = "css/foundation.css"),
 })
-@FacesComponent("Button")
-public class ButtonComponent extends UICommand {
+@FacesComponent("ButtonGroup")
+public class ButtonGroupComponent extends UIPanel {
 
     private enum PropertyKeys {
 
-        href, size, disabled, corner, style, styleClass;
-    }
-    
-    public String getHref() {
-        return (String) getStateHelper().eval(PropertyKeys.href, null);
+        stackEnabled, stackType, even, corner, style, styleClass;
     }
 
-    public void setHref(String href) {
-        getStateHelper().put(PropertyKeys.href, href);
-    }
-    
-    public String getSize() {
-        return (String) getStateHelper().eval(PropertyKeys.size, null);
+    public Boolean isStackEnabled() {
+        return (Boolean) getStateHelper().eval(PropertyKeys.stackEnabled, null);
     }
 
-    public void setSize(String size) {
-        getStateHelper().put(PropertyKeys.size, size);
-    }
-    
-    public Boolean isDisabled() {
-        return (Boolean) getStateHelper().eval(PropertyKeys.disabled, null);
+    public void setStackEnabled(Boolean stackEnabled) {
+        getStateHelper().put(PropertyKeys.stackEnabled, stackEnabled);
     }
 
-    public void setDisabled(Boolean disabled) {
-        getStateHelper().put(PropertyKeys.disabled, disabled);
+    public String getStackType() {
+        return (String) getStateHelper().eval(PropertyKeys.stackType, null);
     }
-    
+
+    public void setStackType(String stackType) {
+        getStateHelper().put(PropertyKeys.stackType, stackType);
+    }
+
+    public String getEven() {
+        return (String) getStateHelper().eval(PropertyKeys.even, null);
+    }
+
+    public void setEven(String even) {
+        getStateHelper().put(PropertyKeys.even, even);
+    }
+
     public String getCorner() {
         return (String) getStateHelper().eval(PropertyKeys.corner, null);
     }
@@ -51,7 +51,7 @@ public class ButtonComponent extends UICommand {
     public void setCorner(String corner) {
         getStateHelper().put(PropertyKeys.corner, corner);
     }
-    
+
     public String getStyle() {
         return (String) getStateHelper().eval(PropertyKeys.style, null);
     }
@@ -59,7 +59,7 @@ public class ButtonComponent extends UICommand {
     public void setStyle(String style) {
         getStateHelper().put(PropertyKeys.style, style);
     }
-    
+
     public String getStyleClass() {
         return (String) getStateHelper().eval(PropertyKeys.styleClass, null);
     }

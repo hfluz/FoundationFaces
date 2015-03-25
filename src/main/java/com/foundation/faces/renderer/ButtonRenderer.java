@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.foundation.faces.renderer;
 
 import com.foundation.faces.component.ButtonComponent;
+import com.foundation.faces.component.SplitButtonComponent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +20,7 @@ import org.apache.commons.lang.StringUtils;
 public class ButtonRenderer extends Renderer {
 
     @Override
-    public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
+    public void encodeBegin(FacesContext context, UIComponent component) throws IOException {
         ResponseWriter writer = context.getResponseWriter();
         writer.startElement("a", component);
         writer.writeAttribute("role", "button", null);
@@ -35,6 +31,11 @@ public class ButtonRenderer extends Renderer {
             writer.writeAttribute("style", buttonComponent.getStyle(), "style");
         }
         writer.write((String) buttonComponent.getValue());
+    }
+    
+    @Override
+    public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
+        ResponseWriter writer = context.getResponseWriter();
         writer.endElement("a");
     }
 
@@ -55,6 +56,9 @@ public class ButtonRenderer extends Renderer {
         }
         if(component.isDisabled() != null && component.isDisabled()){
             styleClasses.add("disabled");
+        }
+        if(component instanceof SplitButtonComponent){
+            styleClasses.add("split");
         }
         return StringUtils.join(styleClasses, ' ');
     }

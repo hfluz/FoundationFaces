@@ -42,5 +42,128 @@
             <type>java.lang.String</type>
             <required>false</required>
         </attribute>
+        <attribute>
+            <name>style</name>
+            <description>Style of the component.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>styleClass</name>
+            <description>Style class applied to this component.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>splitButton</tag-name>
+        <component>
+            <component-type>SplitButton</component-type>
+            <renderer-type>SplitButton</renderer-type>
+        </component>
+        <attribute>
+            <name>value</name>
+            <description>Button label</description>
+            <type>java.lang.String</type>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <name>href</name>
+            <description>Link destination</description>
+            <type>java.lang.String</type>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <name>disabled</name>
+            <description>True or false. Default is false.</description>
+            <type>java.lang.Boolean</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>size</name>
+            <description>Button size. Options are tiny, small, large, expand</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>corner</name>
+            <description>Options are round and radius. Default is disabled.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>style</name>
+            <description>Style of the component.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>styleClass</name>
+            <description>Style class applied to this component.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>buttonGroup</tag-name>
+        <component>
+            <component-type>ButtonGroup</component-type>
+            <renderer-type>ButtonGroup</renderer-type>
+        </component>
+        <attribute>
+            <name>stackEnabled</name>
+            <description>True or false. Default is false.</description>
+            <type>java.lang.Boolean</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>stackType</name>
+            <description>Options are 'stack' or 'stackForSmall'.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>even</name>
+            <description>Allows the button group to evenly expand to the edges of its container. Options range from even-1 to even-8.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>corner</name>
+            <description>Options are round and radius. Default is disabled.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>style</name>
+            <description>Style of the component.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>styleClass</name>
+            <description>Style class applied to this component.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>buttonBar</tag-name>
+        <component>
+            <component-type>ButtonBar</component-type>
+            <renderer-type>ButtonBar</renderer-type>
+        </component>
+        <attribute>
+            <name>style</name>
+            <description>Style of the component.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>styleClass</name>
+            <description>Style class applied to this component.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
     </tag>
 </facelet-taglib>
