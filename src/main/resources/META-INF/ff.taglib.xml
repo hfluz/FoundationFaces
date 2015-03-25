@@ -5,5 +5,42 @@
                 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd">
 
     <namespace>http://foundation.faces.com/taglib</namespace>
-    <composite-library-name>ff</composite-library-name>
+    <composite-library-name>fo</composite-library-name>
+    <tag>
+        <tag-name>button</tag-name>
+        <component>
+            <component-type>Button</component-type>
+            <renderer-type>Button</renderer-type>
+        </component>
+        <attribute>
+            <name>value</name>
+            <description>Button label</description>
+            <type>java.lang.String</type>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <name>href</name>
+            <description>Link destination</description>
+            <type>java.lang.String</type>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <name>disabled</name>
+            <description>True or false. Default is false.</description>
+            <type>java.lang.Boolean</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>size</name>
+            <description>Button size. Options are tiny, small, large, expand</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>corner</name>
+            <description>Options are round and radius. Default is disabled.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+    </tag>
 </facelet-taglib>
