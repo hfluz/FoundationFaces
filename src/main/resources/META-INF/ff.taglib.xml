@@ -154,6 +154,31 @@
         </attribute>
     </tag>
     <tag>
+        <tag-name>menuSection</tag-name>
+        <component>
+            <component-type>MenuSection</component-type>
+            <renderer-type>MenuSection</renderer-type>
+        </component>
+        <attribute>
+            <name>alignment</name>
+            <description>right or left. Default is left.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>style</name>
+            <description>Style of the component.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>styleClass</name>
+            <description>Style class applied to this component.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+    </tag>
+    <tag>
         <tag-name>splitButton</tag-name>
         <component>
             <component-type>SplitButton</component-type>

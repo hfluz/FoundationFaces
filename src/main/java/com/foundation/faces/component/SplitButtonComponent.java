@@ -8,16 +8,16 @@ package com.foundation.faces.component;
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.FacesComponent;
-import javax.faces.component.UICommand;
-import javax.faces.component.UIPanel;
 
 /**
  *
  * @author hfluz
  */
 @ResourceDependencies({
-    @ResourceDependency(library = "foundation", name = "css/foundation.css"),
-    @ResourceDependency(library = "foundation", name = "js/foundation.min.js")
+    @ResourceDependency(library = "foundation", name = "css/foundation.css", target = "head"),
+    @ResourceDependency(library = "foundation", name = "js/jquery.js", target = "body"),
+    @ResourceDependency(library = "foundation", name = "js/foundation.min.js", target = "body"),
+    @ResourceDependency(library = "foundation", name = "js/initializer.js", target = "body")
 })
 @FacesComponent("SplitButton")
 public class SplitButtonComponent extends ButtonComponent {

@@ -18,9 +18,9 @@ import org.apache.commons.lang.StringUtils;
  */
 @FacesRenderer(componentFamily = "Button", rendererType = "Link")
 public class LinkRenderer extends Renderer {
-
+    
     @Override
-    public void encodeBegin(FacesContext context, UIComponent component) throws IOException {
+    public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
         ResponseWriter writer = context.getResponseWriter();
         writer.startElement("a", component);
         ButtonComponent buttonComponent = (ButtonComponent) component;
@@ -30,11 +30,6 @@ public class LinkRenderer extends Renderer {
             writer.writeAttribute("style", buttonComponent.getStyle(), "style");
         }
         writer.write((String) buttonComponent.getValue());
-    }
-    
-    @Override
-    public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
-        ResponseWriter writer = context.getResponseWriter();
         writer.endElement("a");
     }
 
