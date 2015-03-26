@@ -56,6 +56,104 @@
         </attribute>
     </tag>
     <tag>
+        <tag-name>link</tag-name>
+        <component>
+            <component-type>Button</component-type>
+            <renderer-type>Link</renderer-type>
+        </component>
+        <attribute>
+            <name>value</name>
+            <description>Button label</description>
+            <type>java.lang.String</type>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <name>href</name>
+            <description>Link destination</description>
+            <type>java.lang.String</type>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <name>disabled</name>
+            <description>True or false. Default is false.</description>
+            <type>java.lang.Boolean</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>size</name>
+            <description>Button size. Options are tiny, small, large, expand</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>corner</name>
+            <description>Options are round and radius. Default is disabled.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>style</name>
+            <description>Style of the component.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>styleClass</name>
+            <description>Style class applied to this component.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>topBar</tag-name>
+        <component>
+            <component-type>TopBar</component-type>
+            <renderer-type>TopBar</renderer-type>
+        </component>
+        <attribute>
+            <name>home</name>
+            <description>Home label, for example the organization or application name.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>homeLink</name>
+            <description>Home link destination.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>fixed</name>
+            <description>True or false. Default is false.</description>
+            <type>java.lang.Boolean</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>containToGrid</name>
+            <description>Navigation is set to your grid width. Default is false.</description>
+            <type>java.lang.Boolean</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>sticky</name>
+            <description>If true, when the navigation hits the top of the browser, it will act like the fixed top bar and stick to the top as users continue to scroll. Default is false.</description>
+            <type>java.lang.Boolean</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>style</name>
+            <description>Style of the component.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <name>styleClass</name>
+            <description>Style class applied to this component.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+    </tag>
+    <tag>
         <tag-name>splitButton</tag-name>
         <component>
             <component-type>SplitButton</component-type>

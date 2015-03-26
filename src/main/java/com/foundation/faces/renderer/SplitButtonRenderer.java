@@ -35,12 +35,12 @@ public class SplitButtonRenderer extends Renderer {
         writer.writeAttribute("class", "f-dropdown", null);
         writer.writeAttribute("data-dropdown-content", "", null);
         List<UIComponent> innerComponents = component.getChildren();
-        ButtonRenderer buttonRenderer = new ButtonRenderer();
+        LinkRenderer linkRenderer = new LinkRenderer();
         for(UIComponent innerComponent : innerComponents){
             if(innerComponent instanceof ButtonComponent){
                 writer.startElement("li", null);
-                buttonRenderer.encodeBegin(context, (ButtonComponent) innerComponent);
-                buttonRenderer.encodeEnd(context, (ButtonComponent) innerComponent);
+                linkRenderer.encodeBegin(context, (ButtonComponent) innerComponent);
+                linkRenderer.encodeEnd(context, (ButtonComponent) innerComponent);
                 writer.endElement("li");
             }
         }
