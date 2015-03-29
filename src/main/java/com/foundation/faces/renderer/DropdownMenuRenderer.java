@@ -2,7 +2,6 @@ package com.foundation.faces.renderer;
 
 import com.foundation.faces.component.ButtonComponent;
 import com.foundation.faces.component.DropdownMenuComponent;
-import com.foundation.faces.component.MenuSectionComponent;
 import java.io.IOException;
 import java.util.List;
 import javax.faces.component.UIComponent;
@@ -15,41 +14,47 @@ import javax.faces.render.Renderer;
  *
  * @author hfluz
  */
-@FacesRenderer(componentFamily = "Menu", rendererType = "MenuSection")
-public class MenuSectionRenderer extends Renderer{
+@FacesRenderer(componentFamily = "Menu", rendererType = "DropdownMenu")
+public class DropdownMenuRenderer extends Renderer {
 
     @Override
     public void encodeBegin(FacesContext context, UIComponent component) throws IOException {
         ResponseWriter writer = context.getResponseWriter();
-        MenuSectionComponent menuSection = (MenuSectionComponent) component;
-        writer.startElement("ul", component);
-        if(menuSection.getAlignment() == null || menuSection.getAlignment().equals("right")){
-            writer.writeAttribute("class", "right", null);
-        } else {
-            writer.writeAttribute("class", "left", null);
-        }
+        DropdownMenuComponent menuSection = (DropdownMenuComponent) component;
+        writer.startElement("li", menuSection);
+        writer.writeAttribute("class", "has-dropdown", null);
+        encodeSectionLink(writer, menuSection);
+
+        
+    }
+    
+    private void encodeSectionLink(ResponseWriter writer, DropdownMenuComponent menuSection) throws IOException{
+        writer.startElement("a", null);
+        writer.write(menuSection.getLabel());
+        writer.endElement("a");
     }
 
     @Override
     public void encodeChildren(FacesContext context, UIComponent component) throws IOException {
+        ResponseWriter writer = context.getResponseWriter();
         List<UIComponent> innerComponents = component.getChildren();
         LinkRenderer linkRenderer = new LinkRenderer();
-        DropdownMenuRenderer dropdownMenuRenderer = new DropdownMenuRenderer();
+        writer.startElement("ul", null);
+        writer.writeAttribute("class", "dropdown", null);
         for(UIComponent innerComponent : innerComponents){
             if(innerComponent instanceof ButtonComponent){
-                linkRenderer.encodeEnd(context, innerComponent);
-            } else if(innerComponent instanceof DropdownMenuComponent){
-                dropdownMenuRenderer.encodeBegin(context, innerComponent);
-                dropdownMenuRenderer.encodeChildren(context, innerComponent);
-                dropdownMenuRenderer.encodeEnd(context, innerComponent);
+                writer.startElement("li", null);
+                linkRenderer.encodeEnd(context, (ButtonComponent) innerComponent);
+                writer.endElement("li");
             }
         }
+        writer.endElement("ul");
     }
 
     @Override
     public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
         ResponseWriter writer = context.getResponseWriter();
-        writer.endElement("ul");
+        writer.endElement("li");
     }
 
     @Override

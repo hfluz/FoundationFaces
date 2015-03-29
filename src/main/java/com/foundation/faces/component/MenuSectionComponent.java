@@ -5,7 +5,9 @@
  */
 package com.foundation.faces.component;
 
+import java.util.List;
 import javax.faces.component.FacesComponent;
+import javax.faces.component.UIComponent;
 import javax.faces.component.UIPanel;
 
 /**
@@ -15,35 +17,14 @@ import javax.faces.component.UIPanel;
 @FacesComponent("MenuSection")
 public class MenuSectionComponent extends UIPanel {
     private enum PropertyKeys{
-        alignment, style, styleClass;
+        alignment;
     }
     
     public String getAlignment() {
         return (String) getStateHelper().eval(PropertyKeys.alignment, null);
     }
 
-    public void setAlignment(Boolean alignment) {
+    public void setAlignment(String alignment) {
         getStateHelper().put(PropertyKeys.alignment, alignment);
-    }
-    
-    public String getStyle() {
-        return (String) getStateHelper().eval(PropertyKeys.style, null);
-    }
-
-    public void setStyle(String style) {
-        getStateHelper().put(PropertyKeys.style, style);
-    }
-    
-    public String getStyleClass() {
-        return (String) getStateHelper().eval(PropertyKeys.styleClass, null);
-    }
-
-    public void setStyleClass(String styleClass) {
-        getStateHelper().put(PropertyKeys.styleClass, styleClass);
-    }
-
-    @Override
-    public String getFamily() {
-        return "Menu";
     }
 }

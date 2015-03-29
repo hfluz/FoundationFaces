@@ -154,11 +154,17 @@
         </attribute>
     </tag>
     <tag>
-        <tag-name>menuSection</tag-name>
+        <tag-name>dropdownMenu</tag-name>
         <component>
-            <component-type>MenuSection</component-type>
-            <renderer-type>MenuSection</renderer-type>
+            <component-type>DropdownMenu</component-type>
+            <renderer-type>DropdownMenu</renderer-type>
         </component>
+        <attribute>
+            <name>label</name>
+            <description>Dropdown label</description>
+            <type>java.lang.String</type>
+            <required>true</required>
+        </attribute>
         <attribute>
             <name>alignment</name>
             <description>right or left. Default is left.</description>
@@ -174,6 +180,19 @@
         <attribute>
             <name>styleClass</name>
             <description>Style class applied to this component.</description>
+            <type>java.lang.String</type>
+            <required>false</required>
+        </attribute>
+    </tag>
+    <tag>
+        <tag-name>menuSection</tag-name>
+        <component>
+            <component-type>MenuSection</component-type>
+            <renderer-type>MenuSection</renderer-type>
+        </component>
+        <attribute>
+            <name>alignment</name>
+            <description>right or left. Default is left.</description>
             <type>java.lang.String</type>
             <required>false</required>
         </attribute>

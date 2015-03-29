@@ -1,6 +1,7 @@
 package com.foundation.faces.component;
 
 import javax.faces.component.FacesComponent;
+import javax.faces.component.UIComponent;
 import javax.faces.component.UIPanel;
 
 /**
@@ -70,6 +71,16 @@ public class TopBarComponent extends UIPanel {
 
     public void setStyleClass(String styleClass) {
         getStateHelper().put(PropertyKeys.styleClass, styleClass);
+    }
+    
+    public boolean hasLeftSection(){
+//        boolean hasLeftSection = false;
+//        for(UIComponent child : getChildren()){
+//            if(child instanceof ButtonComponent){
+//                if(((ButtonComponent) child).getal)
+//            }
+//        }
+        return false;
     }
 
     @Override
