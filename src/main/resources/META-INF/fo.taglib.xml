@@ -62,6 +62,12 @@
             <renderer-type>Link</renderer-type>
         </component>
         <attribute>
+            <name>active</name>
+            <description>If true renders active styleClass to this component. Default is false.</description>
+            <type>java.lang.Boolean</type>
+            <required>false</required>
+        </attribute>
+        <attribute>
             <name>value</name>
             <description>Button label</description>
             <type>java.lang.String</type>

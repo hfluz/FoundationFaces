@@ -22,13 +22,12 @@ public class DropdownMenuRenderer extends Renderer {
         ResponseWriter writer = context.getResponseWriter();
         DropdownMenuComponent menuSection = (DropdownMenuComponent) component;
         writer.startElement("li", menuSection);
+        writer.writeAttribute("id", menuSection.getClientId(context), null);
         writer.writeAttribute("class", "has-dropdown", null);
         encodeSectionLink(writer, menuSection);
-
-        
     }
-    
-    private void encodeSectionLink(ResponseWriter writer, DropdownMenuComponent menuSection) throws IOException{
+
+    private void encodeSectionLink(ResponseWriter writer, DropdownMenuComponent menuSection) throws IOException {
         writer.startElement("a", null);
         writer.write(menuSection.getLabel());
         writer.endElement("a");
@@ -38,14 +37,12 @@ public class DropdownMenuRenderer extends Renderer {
     public void encodeChildren(FacesContext context, UIComponent component) throws IOException {
         ResponseWriter writer = context.getResponseWriter();
         List<UIComponent> innerComponents = component.getChildren();
-        LinkRenderer linkRenderer = new LinkRenderer();
+        MenuLinkRenderer menuLinkRenderer = new MenuLinkRenderer();
         writer.startElement("ul", null);
         writer.writeAttribute("class", "dropdown", null);
-        for(UIComponent innerComponent : innerComponents){
-            if(innerComponent instanceof ButtonComponent){
-                writer.startElement("li", null);
-                linkRenderer.encodeEnd(context, (ButtonComponent) innerComponent);
-                writer.endElement("li");
+        for (UIComponent innerComponent : innerComponents) {
+            if (innerComponent instanceof ButtonComponent) {
+                menuLinkRenderer.encodeEnd(context, (ButtonComponent) innerComponent);
             }
         }
         writer.endElement("ul");

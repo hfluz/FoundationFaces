@@ -17,7 +17,16 @@ public class ButtonComponent extends UICommand {
 
     private enum PropertyKeys {
 
-        href, size, disabled, corner, style, styleClass;
+        active, href, size, disabled, corner, style, styleClass;
+    }
+    
+    public Boolean getActive() {
+        Boolean active = (Boolean) getStateHelper().eval(PropertyKeys.active, null);
+        return active != null ? active : Boolean.FALSE;
+    }
+
+    public void setActive(Boolean active) {
+        getStateHelper().put(PropertyKeys.active, active);
     }
     
     public String getHref() {
@@ -37,7 +46,8 @@ public class ButtonComponent extends UICommand {
     }
     
     public Boolean isDisabled() {
-        return (Boolean) getStateHelper().eval(PropertyKeys.disabled, null);
+        Boolean disabled = (Boolean) getStateHelper().eval(PropertyKeys.disabled, null);
+        return disabled != null ? disabled : Boolean.FALSE;
     }
 
     public void setDisabled(Boolean disabled) {

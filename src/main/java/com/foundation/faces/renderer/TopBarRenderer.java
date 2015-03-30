@@ -32,22 +32,16 @@ public class TopBarRenderer extends Renderer {
         TopBarComponent topBar = (TopBarComponent) component;
         if (topBar.isFixed() || topBar.isContainToGrid() || topBar.isSticky()) {
             writer.startElement("div", component);
-            StringJoiner styleClass = new StringJoiner(" ");
-            if (topBar.isFixed()) {
-                styleClass.add("fixed");
-            }
-            if (topBar.isContainToGrid()) {
-                styleClass.add("contain-to-grid");
-            }
-            if (topBar.isSticky()) {
-                styleClass.add("sticky");
-            }
-            writer.writeAttribute("class", styleClass.toString(), null);
+            writer.writeAttribute("class", buildDivStyleClass(topBar), null);
             writer.startElement("nav", null);
         } else {
             writer.startElement("nav", component);
         }
-        writer.writeAttribute("class", "top-bar", null);
+        writer.writeAttribute("id", topBar.getClientId(context), null);
+        writer.writeAttribute("class", buildNavStyleClass(topBar), null);
+        if (topBar.getStyle() != null) {
+            writer.writeAttribute("style", topBar.getStyle(), null);
+        }
         writer.writeAttribute("role", "navigation", null);
         writer.writeAttribute("data-topbar", "", null);
 
@@ -59,32 +53,16 @@ public class TopBarRenderer extends Renderer {
         ResponseWriter writer = context.getResponseWriter();
         MenuSectionRenderer menuSectionRenderer = new MenuSectionRenderer();
         DropdownMenuRenderer dropdownMenuRenderer = new DropdownMenuRenderer();
-        LinkRenderer linkRenderer = new LinkRenderer();
+        MenuLinkRenderer menuLinkRenderer = new MenuLinkRenderer();
         List<UIComponent> innerComponents = component.getChildren();
         if (!innerComponents.isEmpty()) {
             List<MenuSectionComponent> rightSections = new ArrayList<>();
             writer.startElement("section", null);
             writer.writeAttribute("class", "top-bar-section", null);
             System.out.println("size " + innerComponents.size());
-//            boolean createLeftSection = createLeftSection((TopBarComponent) component);
-//            if (createLeftSection) {
-//                writer.startElement("ul", null);
-//                writer.writeAttribute("class", "left", null);
-//            }
-            boolean startNewLeftSection = true;
+            boolean leftSectionStarted = false;
             for (UIComponent innerComponent : innerComponents) {
-                if (innerComponent instanceof DropdownMenuComponent
-                        || innerComponent instanceof ButtonComponent) {
-                    if (startNewLeftSection) {
-                        writer.startElement("ul", null);
-                        writer.writeAttribute("class", "left", null);
-                        startNewLeftSection = false;
-                    }
-                } else if (!startNewLeftSection) {
-                    writer.endElement("ul");
-                    startNewLeftSection = true;
-                }
-
+                leftSectionStarted = startOrCloseLeftSectionIfNeeded(writer, innerComponent, leftSectionStarted);
                 if (innerComponent instanceof MenuSectionComponent) {
                     menuSectionRenderer.encodeBegin(context, innerComponent);
                     menuSectionRenderer.encodeChildren(context, innerComponent);
@@ -94,24 +72,9 @@ public class TopBarRenderer extends Renderer {
                     dropdownMenuRenderer.encodeChildren(context, innerComponent);
                     dropdownMenuRenderer.encodeEnd(context, innerComponent);
                 } else if (innerComponent instanceof ButtonComponent) {
-                    writer.startElement("li", null);
-                    linkRenderer.encodeEnd(context, innerComponent);
-                    writer.endElement("li");
+                    menuLinkRenderer.encodeEnd(context, innerComponent);
                 }
             }
-//            if (createLeftSection) {
-//                writer.endElement("ul");
-//            }
-//            if (!rightSections.isEmpty()) {
-//                writer.startElement("ul", null);
-//                writer.writeAttribute("class", "right", null);
-//                for (MenuSectionComponent rs : rightSections) {
-//                    menuSectionRenderer.encodeBegin(context, rs);
-//                    menuSectionRenderer.encodeChildren(context, rs);
-//                    menuSectionRenderer.encodeEnd(context, rs);
-//                }
-//                writer.endElement("ul");
-//            }
             writer.endElement("section");
         }
     }
@@ -129,6 +92,30 @@ public class TopBarRenderer extends Renderer {
     @Override
     public boolean getRendersChildren() {
         return true;
+    }
+
+    private String buildDivStyleClass(TopBarComponent topBar) {
+        StringJoiner styleClass = new StringJoiner(" ");
+        if (topBar.isFixed()) {
+            styleClass.add("fixed");
+        }
+        if (topBar.isContainToGrid()) {
+            styleClass.add("contain-to-grid");
+        }
+        if (topBar.isSticky()) {
+            styleClass.add("sticky");
+        }
+
+        return styleClass.toString();
+    }
+
+    private String buildNavStyleClass(TopBarComponent topBar) {
+        StringJoiner styleClass = new StringJoiner(" ");
+        styleClass.add("top-bar");
+        if (topBar.getStyleClass() != null) {
+            styleClass.add(topBar.getStyleClass());
+        }
+        return styleClass.toString();
     }
 
     private void encodeTitleArea(ResponseWriter writer, TopBarComponent topBar) throws IOException {
@@ -155,19 +142,26 @@ public class TopBarRenderer extends Renderer {
         writer.endElement("ul");
     }
 
-    private boolean createLeftSection(TopBarComponent topBar) {
-        for (UIComponent innerComponent : topBar.getChildren()) {
-            if (innerComponent instanceof ButtonComponent
-                    || innerComponent instanceof DropdownMenuComponent) {
-                return true;
+    /**
+     *
+     * @param writer
+     * @param nextComponentToBeEncoded
+     * @param leftSectionStarted
+     * @return new value of startNewLeftSection flag.
+     * @throws IOException
+     */
+    private boolean startOrCloseLeftSectionIfNeeded(ResponseWriter writer, UIComponent nextComponentToBeEncoded, boolean leftSectionStarted) throws IOException {
+        if (nextComponentToBeEncoded instanceof DropdownMenuComponent
+                || nextComponentToBeEncoded instanceof ButtonComponent) {
+            if (!leftSectionStarted) {
+                writer.startElement("ul", null);
+                writer.writeAttribute("class", "left", null);
+                leftSectionStarted = true;
             }
-            if (innerComponent instanceof MenuSectionComponent) {
-                MenuSectionComponent menuSection = (MenuSectionComponent) innerComponent;
-                if (menuSection.getAlignment() == null || menuSection.getAlignment().equals("left")) {
-                    return true;
-                }
-            }
+        } else if (leftSectionStarted) {
+            writer.endElement("ul");
+            leftSectionStarted = false;
         }
-        return false;
+        return leftSectionStarted;
     }
 }

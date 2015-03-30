@@ -22,9 +22,11 @@ public class ButtonRenderer extends Renderer {
     @Override
     public void encodeBegin(FacesContext context, UIComponent component) throws IOException {
         ResponseWriter writer = context.getResponseWriter();
-        writer.startElement("a", component);
-        writer.writeAttribute("role", "button", null);
         ButtonComponent buttonComponent = (ButtonComponent) component;
+        writer.startElement("a", buttonComponent);
+        writer.writeAttribute("id", buttonComponent.getClientId(context), null);
+        writer.writeAttribute("role", "button", null);
+        
         writer.writeAttribute("href", buttonComponent.getHref(), "href");
         writer.writeAttribute("class", buildStyleClass(buttonComponent), "styleClass");
         if (buttonComponent.getStyle() != null && !buttonComponent.getStyle().trim().isEmpty()) {

@@ -24,6 +24,7 @@ public class LinkRenderer extends Renderer {
         ResponseWriter writer = context.getResponseWriter();
         writer.startElement("a", component);
         ButtonComponent buttonComponent = (ButtonComponent) component;
+        writer.writeAttribute("id", buttonComponent.getClientId(context), null);
         writer.writeAttribute("href", buttonComponent.getHref(), "href");
         writer.writeAttribute("class", buildStyleClass(buttonComponent), "styleClass");
         if (buttonComponent.getStyle() != null && !buttonComponent.getStyle().trim().isEmpty()) {
@@ -33,24 +34,24 @@ public class LinkRenderer extends Renderer {
         writer.endElement("a");
     }
 
-    private String buildStyleClass(ButtonComponent component) {
+    private String buildStyleClass(ButtonComponent buttonComponent) {
         List<String> styleClasses = new ArrayList<>();
-        if (component.getSize() != null) {
+        if (buttonComponent.getSize() != null) {
             String allowedSizes = "tiny small large expand";
-            if (allowedSizes.contains(component.getSize())) {
-                styleClasses.add(component.getSize());
+            if (allowedSizes.contains(buttonComponent.getSize())) {
+                styleClasses.add(buttonComponent.getSize());
             }
         }
-        if (component.getCorner() != null) {
+        if (buttonComponent.getCorner() != null) {
             String allowedCorners = "round radius";
-            if (allowedCorners.contains(component.getCorner())) {
-                styleClasses.add(component.getCorner());
+            if (allowedCorners.contains(buttonComponent.getCorner())) {
+                styleClasses.add(buttonComponent.getCorner());
             }
         }
-        if(component.isDisabled() != null && component.isDisabled()){
+        if(buttonComponent.isDisabled()){
             styleClasses.add("disabled");
         }
-        if(component instanceof SplitButtonComponent){
+        if(buttonComponent instanceof SplitButtonComponent){
             styleClasses.add("split");
         }
         return StringUtils.join(styleClasses, ' ');

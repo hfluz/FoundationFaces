@@ -22,7 +22,8 @@ public class MenuSectionRenderer extends Renderer{
     public void encodeBegin(FacesContext context, UIComponent component) throws IOException {
         ResponseWriter writer = context.getResponseWriter();
         MenuSectionComponent menuSection = (MenuSectionComponent) component;
-        writer.startElement("ul", component);
+        writer.startElement("ul", menuSection);
+        writer.writeAttribute("id", menuSection.getClientId(context), null);
         if(menuSection.getAlignment() == null || menuSection.getAlignment().equals("right")){
             writer.writeAttribute("class", "right", null);
         } else {
@@ -33,11 +34,11 @@ public class MenuSectionRenderer extends Renderer{
     @Override
     public void encodeChildren(FacesContext context, UIComponent component) throws IOException {
         List<UIComponent> innerComponents = component.getChildren();
-        LinkRenderer linkRenderer = new LinkRenderer();
+        MenuLinkRenderer menuLinkRenderer = new MenuLinkRenderer();
         DropdownMenuRenderer dropdownMenuRenderer = new DropdownMenuRenderer();
         for(UIComponent innerComponent : innerComponents){
             if(innerComponent instanceof ButtonComponent){
-                linkRenderer.encodeEnd(context, innerComponent);
+                menuLinkRenderer.encodeEnd(context, innerComponent);
             } else if(innerComponent instanceof DropdownMenuComponent){
                 dropdownMenuRenderer.encodeBegin(context, innerComponent);
                 dropdownMenuRenderer.encodeChildren(context, innerComponent);
