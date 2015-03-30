@@ -8,7 +8,7 @@ import javax.faces.component.UIPanel;
  * @author hfluz
  */
 @FacesComponent("MenuSection")
-public class MenuSectionComponent extends UIPanel {
+public class MenuSectionUI extends UIPanel {
     private enum PropertyKeys{
         alignment;
     }
@@ -19,5 +19,10 @@ public class MenuSectionComponent extends UIPanel {
 
     public void setAlignment(String alignment) {
         getStateHelper().put(PropertyKeys.alignment, alignment);
+    }
+    
+    @Override
+    public String getRendererType() {
+        return "MenuSection";
     }
 }

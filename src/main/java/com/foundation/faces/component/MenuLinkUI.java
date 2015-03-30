@@ -14,9 +14,8 @@ import javax.faces.component.FacesComponent;
  * @author hfluz
  */
 @ResourceDependencies({
-    @ResourceDependency(library = "foundation", name = "css/foundation.css"),
-})
+    @ResourceDependency(library = "foundation", name = "css/foundation.css"),})
 @FacesComponent("MenuLink")
-public class MenuLinkComponent extends ButtonBarComponent {
-    
+public class MenuLinkUI extends ButtonBarUI {
+
 }

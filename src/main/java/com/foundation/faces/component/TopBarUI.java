@@ -1,7 +1,6 @@
 package com.foundation.faces.component;
 
 import javax.faces.component.FacesComponent;
-import javax.faces.component.UIComponent;
 import javax.faces.component.UIPanel;
 
 /**
@@ -9,7 +8,7 @@ import javax.faces.component.UIPanel;
  * @author hfluz
  */
 @FacesComponent("TopBar")
-public class TopBarComponent extends UIPanel {
+public class TopBarUI extends UIPanel {
     private enum PropertyKeys {
         home, homeLink, style, styleClass, fixed, containToGrid, sticky;
     }
@@ -73,18 +72,13 @@ public class TopBarComponent extends UIPanel {
         getStateHelper().put(PropertyKeys.styleClass, styleClass);
     }
     
-    public boolean hasLeftSection(){
-//        boolean hasLeftSection = false;
-//        for(UIComponent child : getChildren()){
-//            if(child instanceof ButtonComponent){
-//                if(((ButtonComponent) child).getal)
-//            }
-//        }
-        return false;
-    }
-
     @Override
     public String getFamily() {
         return "Menu";
+    }
+    
+    @Override
+    public String getRendererType() {
+        return "TopBar";
     }
 }

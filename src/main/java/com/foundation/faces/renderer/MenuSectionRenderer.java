@@ -1,8 +1,8 @@
 package com.foundation.faces.renderer;
 
-import com.foundation.faces.component.ButtonComponent;
-import com.foundation.faces.component.DropdownMenuComponent;
-import com.foundation.faces.component.MenuSectionComponent;
+import com.foundation.faces.component.ButtonUI;
+import com.foundation.faces.component.DropdownMenuUI;
+import com.foundation.faces.component.MenuSectionUI;
 import java.io.IOException;
 import java.util.List;
 import javax.faces.component.UIComponent;
@@ -21,7 +21,7 @@ public class MenuSectionRenderer extends Renderer{
     @Override
     public void encodeBegin(FacesContext context, UIComponent component) throws IOException {
         ResponseWriter writer = context.getResponseWriter();
-        MenuSectionComponent menuSection = (MenuSectionComponent) component;
+        MenuSectionUI menuSection = (MenuSectionUI) component;
         writer.startElement("ul", menuSection);
         writer.writeAttribute("id", menuSection.getClientId(context), null);
         if(menuSection.getAlignment() == null || menuSection.getAlignment().equals("right")){
@@ -37,9 +37,9 @@ public class MenuSectionRenderer extends Renderer{
         MenuLinkRenderer menuLinkRenderer = new MenuLinkRenderer();
         DropdownMenuRenderer dropdownMenuRenderer = new DropdownMenuRenderer();
         for(UIComponent innerComponent : innerComponents){
-            if(innerComponent instanceof ButtonComponent){
+            if(innerComponent instanceof ButtonUI){
                 menuLinkRenderer.encodeEnd(context, innerComponent);
-            } else if(innerComponent instanceof DropdownMenuComponent){
+            } else if(innerComponent instanceof DropdownMenuUI){
                 dropdownMenuRenderer.encodeBegin(context, innerComponent);
                 dropdownMenuRenderer.encodeChildren(context, innerComponent);
                 dropdownMenuRenderer.encodeEnd(context, innerComponent);

@@ -13,7 +13,7 @@ import javax.faces.component.UIPanel;
     @ResourceDependency(library = "foundation", name = "css/foundation.css"),
 })
 @FacesComponent("ButtonGroup")
-public class ButtonGroupComponent extends UIPanel {
+public class ButtonGroupUI extends UIPanel {
 
     private enum PropertyKeys {
 
@@ -71,5 +71,10 @@ public class ButtonGroupComponent extends UIPanel {
     @Override
     public String getFamily() {
         return "Button";
+    }
+    
+    @Override
+    public String getRendererType() {
+        return "ButtonGroup";
     }
 }

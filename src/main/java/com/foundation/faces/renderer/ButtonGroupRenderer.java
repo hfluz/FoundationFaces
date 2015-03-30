@@ -1,7 +1,7 @@
 package com.foundation.faces.renderer;
 
-import com.foundation.faces.component.ButtonComponent;
-import com.foundation.faces.component.ButtonGroupComponent;
+import com.foundation.faces.component.ButtonUI;
+import com.foundation.faces.component.ButtonGroupUI;
 import java.io.IOException;
 import java.util.List;
 import java.util.StringJoiner;
@@ -21,7 +21,7 @@ public class ButtonGroupRenderer extends Renderer {
     @Override
     public void encodeBegin(FacesContext context, UIComponent component) throws IOException {
         ResponseWriter writer = context.getResponseWriter();
-        ButtonGroupComponent buttonGroupComponent = (ButtonGroupComponent) component;
+        ButtonGroupUI buttonGroupComponent = (ButtonGroupUI) component;
         writer.startElement("ul", component);
         writer.writeAttribute("class", buildStyleClass(buttonGroupComponent), "styleClass");
         if (buttonGroupComponent.getStyle() != null) {
@@ -35,10 +35,10 @@ public class ButtonGroupRenderer extends Renderer {
         List<UIComponent> innerComponents = component.getChildren();
         ButtonRenderer buttonRenderer = new ButtonRenderer();
         for (UIComponent innerComponent : innerComponents) {
-            if (innerComponent instanceof ButtonComponent) {
+            if (innerComponent instanceof ButtonUI) {
                 writer.startElement("li", null);
-                buttonRenderer.encodeBegin(context, (ButtonComponent) innerComponent);
-                buttonRenderer.encodeEnd(context, (ButtonComponent) innerComponent);
+                buttonRenderer.encodeBegin(context, (ButtonUI) innerComponent);
+                buttonRenderer.encodeEnd(context, (ButtonUI) innerComponent);
                 writer.endElement("li");
             }
         }
@@ -50,7 +50,7 @@ public class ButtonGroupRenderer extends Renderer {
         writer.endElement("ul");
     }
 
-    private String buildStyleClass(ButtonGroupComponent component) {
+    private String buildStyleClass(ButtonGroupUI component) {
         StringJoiner styleClasses = new StringJoiner(" ");
         styleClasses.add("button-group");
         if (component.getStyleClass() != null) {

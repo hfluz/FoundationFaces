@@ -5,10 +5,10 @@
  */
 package com.foundation.faces.renderer;
 
-import com.foundation.faces.component.ButtonComponent;
-import com.foundation.faces.component.DropdownMenuComponent;
-import com.foundation.faces.component.MenuSectionComponent;
-import com.foundation.faces.component.TopBarComponent;
+import com.foundation.faces.component.ButtonUI;
+import com.foundation.faces.component.DropdownMenuUI;
+import com.foundation.faces.component.MenuSectionUI;
+import com.foundation.faces.component.TopBarUI;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class TopBarRenderer extends Renderer {
     @Override
     public void encodeBegin(FacesContext context, UIComponent component) throws IOException {
         ResponseWriter writer = writer = context.getResponseWriter();
-        TopBarComponent topBar = (TopBarComponent) component;
+        TopBarUI topBar = (TopBarUI) component;
         if (topBar.isFixed() || topBar.isContainToGrid() || topBar.isSticky()) {
             writer.startElement("div", component);
             writer.writeAttribute("class", buildDivStyleClass(topBar), null);
@@ -56,22 +56,22 @@ public class TopBarRenderer extends Renderer {
         MenuLinkRenderer menuLinkRenderer = new MenuLinkRenderer();
         List<UIComponent> innerComponents = component.getChildren();
         if (!innerComponents.isEmpty()) {
-            List<MenuSectionComponent> rightSections = new ArrayList<>();
+            List<MenuSectionUI> rightSections = new ArrayList<>();
             writer.startElement("section", null);
             writer.writeAttribute("class", "top-bar-section", null);
             System.out.println("size " + innerComponents.size());
             boolean leftSectionStarted = false;
             for (UIComponent innerComponent : innerComponents) {
                 leftSectionStarted = startOrCloseLeftSectionIfNeeded(writer, innerComponent, leftSectionStarted);
-                if (innerComponent instanceof MenuSectionComponent) {
+                if (innerComponent instanceof MenuSectionUI) {
                     menuSectionRenderer.encodeBegin(context, innerComponent);
                     menuSectionRenderer.encodeChildren(context, innerComponent);
                     menuSectionRenderer.encodeEnd(context, innerComponent);
-                } else if (innerComponent instanceof DropdownMenuComponent) {
+                } else if (innerComponent instanceof DropdownMenuUI) {
                     dropdownMenuRenderer.encodeBegin(context, innerComponent);
                     dropdownMenuRenderer.encodeChildren(context, innerComponent);
                     dropdownMenuRenderer.encodeEnd(context, innerComponent);
-                } else if (innerComponent instanceof ButtonComponent) {
+                } else if (innerComponent instanceof ButtonUI) {
                     menuLinkRenderer.encodeEnd(context, innerComponent);
                 }
             }
@@ -82,7 +82,7 @@ public class TopBarRenderer extends Renderer {
     @Override
     public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
         ResponseWriter writer = context.getResponseWriter();
-        TopBarComponent topBar = (TopBarComponent) component;
+        TopBarUI topBar = (TopBarUI) component;
         writer.endElement("nav");
         if (topBar.isFixed() || topBar.isContainToGrid() || topBar.isSticky()) {
             writer.endElement("div");
@@ -94,7 +94,7 @@ public class TopBarRenderer extends Renderer {
         return true;
     }
 
-    private String buildDivStyleClass(TopBarComponent topBar) {
+    private String buildDivStyleClass(TopBarUI topBar) {
         StringJoiner styleClass = new StringJoiner(" ");
         if (topBar.isFixed()) {
             styleClass.add("fixed");
@@ -109,7 +109,7 @@ public class TopBarRenderer extends Renderer {
         return styleClass.toString();
     }
 
-    private String buildNavStyleClass(TopBarComponent topBar) {
+    private String buildNavStyleClass(TopBarUI topBar) {
         StringJoiner styleClass = new StringJoiner(" ");
         styleClass.add("top-bar");
         if (topBar.getStyleClass() != null) {
@@ -118,7 +118,7 @@ public class TopBarRenderer extends Renderer {
         return styleClass.toString();
     }
 
-    private void encodeTitleArea(ResponseWriter writer, TopBarComponent topBar) throws IOException {
+    private void encodeTitleArea(ResponseWriter writer, TopBarUI topBar) throws IOException {
         writer.startElement("ul", null);
         writer.writeAttribute("class", "title-area", null);
         writer.startElement("li", null);
@@ -151,8 +151,8 @@ public class TopBarRenderer extends Renderer {
      * @throws IOException
      */
     private boolean startOrCloseLeftSectionIfNeeded(ResponseWriter writer, UIComponent nextComponentToBeEncoded, boolean leftSectionStarted) throws IOException {
-        if (nextComponentToBeEncoded instanceof DropdownMenuComponent
-                || nextComponentToBeEncoded instanceof ButtonComponent) {
+        if (nextComponentToBeEncoded instanceof DropdownMenuUI
+                || nextComponentToBeEncoded instanceof ButtonUI) {
             if (!leftSectionStarted) {
                 writer.startElement("ul", null);
                 writer.writeAttribute("class", "left", null);

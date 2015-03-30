@@ -1,7 +1,7 @@
 package com.foundation.faces.renderer;
 
-import com.foundation.faces.component.ButtonComponent;
-import com.foundation.faces.component.SplitButtonComponent;
+import com.foundation.faces.component.ButtonUI;
+import com.foundation.faces.component.SplitButtonUI;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class ButtonRenderer extends Renderer {
     @Override
     public void encodeBegin(FacesContext context, UIComponent component) throws IOException {
         ResponseWriter writer = context.getResponseWriter();
-        ButtonComponent buttonComponent = (ButtonComponent) component;
+        ButtonUI buttonComponent = (ButtonUI) component;
         writer.startElement("a", buttonComponent);
         writer.writeAttribute("id", buttonComponent.getClientId(context), null);
         writer.writeAttribute("role", "button", null);
@@ -41,7 +41,7 @@ public class ButtonRenderer extends Renderer {
         writer.endElement("a");
     }
 
-    private String buildStyleClass(ButtonComponent component) {
+    private String buildStyleClass(ButtonUI component) {
         List<String> styleClasses = new ArrayList<>();
         styleClasses.add("button");
         if (component.getSize() != null) {
@@ -59,7 +59,7 @@ public class ButtonRenderer extends Renderer {
         if(component.isDisabled() != null && component.isDisabled()){
             styleClasses.add("disabled");
         }
-        if(component instanceof SplitButtonComponent){
+        if(component instanceof SplitButtonUI){
             styleClasses.add("split");
         }
         return StringUtils.join(styleClasses, ' ');

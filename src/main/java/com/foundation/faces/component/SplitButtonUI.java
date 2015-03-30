@@ -20,5 +20,15 @@ import javax.faces.component.FacesComponent;
     @ResourceDependency(library = "foundation", name = "js/initializer.js", target = "body")
 })
 @FacesComponent("SplitButton")
-public class SplitButtonComponent extends ButtonComponent {
+public class SplitButtonUI extends ButtonUI {
+
+    @Override
+    public String getFamily() {
+        return "Button";
+    }
+    
+    @Override
+    public String getRendererType() {
+        return "SplitButton";
+    }
 }

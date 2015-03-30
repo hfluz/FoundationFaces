@@ -1,6 +1,6 @@
 package com.foundation.faces.renderer;
 
-import com.foundation.faces.component.ButtonComponent;
+import com.foundation.faces.component.ButtonUI;
 import java.io.IOException;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -18,7 +18,7 @@ public class MenuLinkRenderer extends Renderer{
     @Override
     public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
         ResponseWriter writer = context.getResponseWriter();
-        ButtonComponent link = (ButtonComponent) component;
+        ButtonUI link = (ButtonUI) component;
         LinkRenderer linkRenderer = new LinkRenderer();
         writer.startElement("li", link);
         if(link.getActive()){

@@ -1,7 +1,7 @@
 package com.foundation.faces.renderer;
 
-import com.foundation.faces.component.ButtonComponent;
-import com.foundation.faces.component.SplitButtonComponent;
+import com.foundation.faces.component.ButtonUI;
+import com.foundation.faces.component.SplitButtonUI;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class LinkRenderer extends Renderer {
     public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
         ResponseWriter writer = context.getResponseWriter();
         writer.startElement("a", component);
-        ButtonComponent buttonComponent = (ButtonComponent) component;
+        ButtonUI buttonComponent = (ButtonUI) component;
         writer.writeAttribute("id", buttonComponent.getClientId(context), null);
         writer.writeAttribute("href", buttonComponent.getHref(), "href");
         writer.writeAttribute("class", buildStyleClass(buttonComponent), "styleClass");
@@ -34,7 +34,7 @@ public class LinkRenderer extends Renderer {
         writer.endElement("a");
     }
 
-    private String buildStyleClass(ButtonComponent buttonComponent) {
+    private String buildStyleClass(ButtonUI buttonComponent) {
         List<String> styleClasses = new ArrayList<>();
         if (buttonComponent.getSize() != null) {
             String allowedSizes = "tiny small large expand";
@@ -51,7 +51,7 @@ public class LinkRenderer extends Renderer {
         if(buttonComponent.isDisabled()){
             styleClasses.add("disabled");
         }
-        if(buttonComponent instanceof SplitButtonComponent){
+        if(buttonComponent instanceof SplitButtonUI){
             styleClasses.add("split");
         }
         return StringUtils.join(styleClasses, ' ');

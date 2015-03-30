@@ -5,8 +5,6 @@
  */
 package com.foundation.faces.component;
 
-import javax.faces.application.ResourceDependencies;
-import javax.faces.application.ResourceDependency;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIPanel;
 
@@ -14,17 +12,28 @@ import javax.faces.component.UIPanel;
  *
  * @author hfluz
  */
-@ResourceDependencies({
-    @ResourceDependency(library = "foundation", name = "css/foundation.css"),
-})
-@FacesComponent("ButtonBar")
-public class ButtonBarComponent extends UIPanel {
-
-    private enum PropertyKeys {
-
-        style, styleClass;
+@FacesComponent("DropdownMenu")
+public class DropdownMenuUI extends UIPanel {
+    private enum PropertyKeys{
+        label, alignment, style, styleClass;
+    }
+    
+    public String getLabel() {
+        return (String) getStateHelper().eval(PropertyKeys.label, null);
     }
 
+    public void setLabel(String label) {
+        getStateHelper().put(PropertyKeys.label, label);
+    }
+    
+    public String getAlignment() {
+        return (String) getStateHelper().eval(PropertyKeys.alignment, null);
+    }
+
+    public void setAlignment(String alignment) {
+        getStateHelper().put(PropertyKeys.alignment, alignment);
+    }
+    
     public String getStyle() {
         return (String) getStateHelper().eval(PropertyKeys.style, null);
     }
@@ -32,7 +41,7 @@ public class ButtonBarComponent extends UIPanel {
     public void setStyle(String style) {
         getStateHelper().put(PropertyKeys.style, style);
     }
-
+    
     public String getStyleClass() {
         return (String) getStateHelper().eval(PropertyKeys.styleClass, null);
     }
@@ -43,6 +52,11 @@ public class ButtonBarComponent extends UIPanel {
 
     @Override
     public String getFamily() {
-        return "Button";
+        return "Menu";
+    }
+    
+    @Override
+    public String getRendererType() {
+        return "DropdownMenu";
     }
 }

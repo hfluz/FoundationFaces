@@ -1,7 +1,7 @@
 package com.foundation.faces.renderer;
 
-import com.foundation.faces.component.ButtonBarComponent;
-import com.foundation.faces.component.ButtonGroupComponent;
+import com.foundation.faces.component.ButtonBarUI;
+import com.foundation.faces.component.ButtonGroupUI;
 import java.io.IOException;
 import java.util.List;
 import javax.faces.component.UIComponent;
@@ -20,7 +20,7 @@ public class ButtonBarRenderer extends Renderer{
     @Override
     public void encodeBegin(FacesContext context, UIComponent component) throws IOException {
         ResponseWriter writer = context.getResponseWriter();
-        ButtonBarComponent buttonBarComponent = (ButtonBarComponent) component;
+        ButtonBarUI buttonBarComponent = (ButtonBarUI) component;
         writer.startElement("div", component);
         writer.writeAttribute("class", "button-bar", null);
         if(buttonBarComponent.getStyleClass() != null){
@@ -36,7 +36,7 @@ public class ButtonBarRenderer extends Renderer{
         List<UIComponent> innerComponents = component.getChildren();
         ButtonGroupRenderer buttonGroupRenderer = new ButtonGroupRenderer();
         for(UIComponent innerComponent : innerComponents){
-            if(innerComponent instanceof ButtonGroupComponent){
+            if(innerComponent instanceof ButtonGroupUI){
                 buttonGroupRenderer.encodeBegin(context, innerComponent);
                 buttonGroupRenderer.encodeChildren(context, innerComponent);
                 buttonGroupRenderer.encodeEnd(context, innerComponent);

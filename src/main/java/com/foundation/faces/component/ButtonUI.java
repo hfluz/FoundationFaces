@@ -13,7 +13,7 @@ import javax.faces.component.UICommand;
     @ResourceDependency(library = "foundation", name = "css/foundation.css"),
 })
 @FacesComponent("Button")
-public class ButtonComponent extends UICommand {
+public class ButtonUI extends UICommand {
 
     private enum PropertyKeys {
 
@@ -80,6 +80,11 @@ public class ButtonComponent extends UICommand {
 
     @Override
     public String getFamily() {
+        return "Button";
+    }
+    
+    @Override
+    public String getRendererType() {
         return "Button";
     }
 }

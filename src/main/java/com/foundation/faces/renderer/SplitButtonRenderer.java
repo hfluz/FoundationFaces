@@ -1,6 +1,6 @@
 package com.foundation.faces.renderer;
 
-import com.foundation.faces.component.ButtonComponent;
+import com.foundation.faces.component.ButtonUI;
 import java.io.IOException;
 import java.util.List;
 import javax.faces.component.UIComponent;
@@ -37,10 +37,10 @@ public class SplitButtonRenderer extends Renderer {
         List<UIComponent> innerComponents = component.getChildren();
         LinkRenderer linkRenderer = new LinkRenderer();
         for(UIComponent innerComponent : innerComponents){
-            if(innerComponent instanceof ButtonComponent){
+            if(innerComponent instanceof ButtonUI){
                 writer.startElement("li", null);
-                linkRenderer.encodeBegin(context, (ButtonComponent) innerComponent);
-                linkRenderer.encodeEnd(context, (ButtonComponent) innerComponent);
+                linkRenderer.encodeBegin(context, (ButtonUI) innerComponent);
+                linkRenderer.encodeEnd(context, (ButtonUI) innerComponent);
                 writer.endElement("li");
             }
         }
