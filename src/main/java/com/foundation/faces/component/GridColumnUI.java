@@ -10,6 +10,7 @@ public class GridColumnUI extends UIPanel {
 
     private enum PropertyKeys {
 
+        style, styleClass,
         smallWidth, mediumWidth, largeWidth,
         smallOffset, mediumOffset, largeOffset,
         mediumUncentered, largeUncentered,
@@ -20,51 +21,51 @@ public class GridColumnUI extends UIPanel {
         end;
     }
 
-    public String getSmallWidth() {
-        return (String) getStateHelper().eval(PropertyKeys.smallWidth, null);
+    public Integer getSmallWidth() {
+        return (Integer) getStateHelper().eval(PropertyKeys.smallWidth, null);
     }
 
-    public void setSmallWidth(String smallWidth) {
+    public void setSmallWidth(Integer smallWidth) {
         getStateHelper().put(PropertyKeys.smallWidth, smallWidth);
     }
 
-    public String getMediumWidth() {
-        return (String) getStateHelper().eval(PropertyKeys.mediumWidth, null);
+    public Integer getMediumWidth() {
+        return (Integer) getStateHelper().eval(PropertyKeys.mediumWidth, null);
     }
 
-    public void setMediumWidth(String mediumWidth) {
+    public void setMediumWidth(Integer mediumWidth) {
         getStateHelper().put(PropertyKeys.mediumWidth, mediumWidth);
     }
 
-    public String getLargeWidth() {
-        return (String) getStateHelper().eval(PropertyKeys.largeWidth, null);
+    public Integer getLargeWidth() {
+        return (Integer) getStateHelper().eval(PropertyKeys.largeWidth, null);
     }
 
-    public void setLargeWidth(String largeWidth) {
+    public void setLargeWidth(Integer largeWidth) {
         getStateHelper().put(PropertyKeys.largeWidth, largeWidth);
     }
 
-    public String getSmallOffset() {
-        return (String) getStateHelper().eval(PropertyKeys.smallOffset, null);
+    public Integer getSmallOffset() {
+        return (Integer) getStateHelper().eval(PropertyKeys.smallOffset, null);
     }
 
-    public void setSmallOffset(String smallOffset) {
+    public void setSmallOffset(Integer smallOffset) {
         getStateHelper().put(PropertyKeys.smallOffset, smallOffset);
     }
 
-    public String getMediumOffset() {
-        return (String) getStateHelper().eval(PropertyKeys.mediumOffset, null);
+    public Integer getMediumOffset() {
+        return (Integer) getStateHelper().eval(PropertyKeys.mediumOffset, null);
     }
 
-    public void setMediumOffset(String mediumOffset) {
+    public void setMediumOffset(Integer mediumOffset) {
         getStateHelper().put(PropertyKeys.mediumOffset, mediumOffset);
     }
 
-    public String getLargeOffset() {
-        return (String) getStateHelper().eval(PropertyKeys.largeOffset, null);
+    public Integer getLargeOffset() {
+        return (Integer) getStateHelper().eval(PropertyKeys.largeOffset, null);
     }
 
-    public void setLargeOffset(String largeOffset) {
+    public void setLargeOffset(Integer largeOffset) {
         getStateHelper().put(PropertyKeys.largeOffset, largeOffset);
     }
 
@@ -113,51 +114,51 @@ public class GridColumnUI extends UIPanel {
         getStateHelper().put(PropertyKeys.largeCentered, largeCentered);
     }
 
-    public String getSmallPush() {
-        return (String) getStateHelper().eval(PropertyKeys.smallPush, null);
+    public Integer getSmallPush() {
+        return (Integer) getStateHelper().eval(PropertyKeys.smallPush, null);
     }
 
-    public void setSmallPush(String smallPush) {
+    public void setSmallPush(Integer smallPush) {
         getStateHelper().put(PropertyKeys.smallPush, smallPush);
     }
 
-    public String getMediumPush() {
-        return (String) getStateHelper().eval(PropertyKeys.mediumPush, null);
+    public Integer getMediumPush() {
+        return (Integer) getStateHelper().eval(PropertyKeys.mediumPush, null);
     }
 
-    public void setMediumPush(String mediumPush) {
+    public void setMediumPush(Integer mediumPush) {
         getStateHelper().put(PropertyKeys.mediumPush, mediumPush);
     }
 
-    public String getLargePush() {
-        return (String) getStateHelper().eval(PropertyKeys.largePush, null);
+    public Integer getLargePush() {
+        return (Integer) getStateHelper().eval(PropertyKeys.largePush, null);
     }
 
-    public void setLargePush(String largePush) {
+    public void setLargePush(Integer largePush) {
         getStateHelper().put(PropertyKeys.largePush, largePush);
     }
 
-    public String getSmallPull() {
-        return (String) getStateHelper().eval(PropertyKeys.smallPull, null);
+    public Integer getSmallPull() {
+        return (Integer) getStateHelper().eval(PropertyKeys.smallPull, null);
     }
 
-    public void setSmallPull(String smallPull) {
+    public void setSmallPull(Integer smallPull) {
         getStateHelper().put(PropertyKeys.smallPull, smallPull);
     }
 
-    public String getMediumPull() {
-        return (String) getStateHelper().eval(PropertyKeys.mediumPull, null);
+    public Integer getMediumPull() {
+        return (Integer) getStateHelper().eval(PropertyKeys.mediumPull, null);
     }
 
-    public void setMediumPull(String mediumPull) {
+    public void setMediumPull(Integer mediumPull) {
         getStateHelper().put(PropertyKeys.mediumPull, mediumPull);
     }
 
-    public String getLargePull() {
-        return (String) getStateHelper().eval(PropertyKeys.largePull, null);
+    public Integer getLargePull() {
+        return (Integer) getStateHelper().eval(PropertyKeys.largePull, null);
     }
 
-    public void setLargePull(String largePull) {
+    public void setLargePull(Integer largePull) {
         getStateHelper().put(PropertyKeys.largePull, largePull);
     }
 
@@ -186,5 +187,21 @@ public class GridColumnUI extends UIPanel {
 
     public void setEnd(Boolean end) {
         getStateHelper().put(PropertyKeys.end, end);
+    }
+    
+    public String getStyle() {
+        return (String) getStateHelper().eval(PropertyKeys.style, null);
+    }
+
+    public void setStyle(String style) {
+        getStateHelper().put(PropertyKeys.style, style);
+    }
+    
+    public String getStyleClass() {
+        return (String) getStateHelper().eval(PropertyKeys.styleClass, null);
+    }
+
+    public void setStyleClass(String styleClass) {
+        getStateHelper().put(PropertyKeys.styleClass, styleClass);
     }
 }

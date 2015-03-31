@@ -3,6 +3,7 @@ package com.foundation.faces.renderer;
 import com.foundation.faces.component.GridRowUI;
 import com.foundation.faces.util.RendererUtil;
 import java.io.IOException;
+import java.util.StringJoiner;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
@@ -21,6 +22,7 @@ public class GridRowRenderer extends Renderer {
         ResponseWriter writer = context.getResponseWriter();
         GridRowUI gridRow = (GridRowUI) component;
         writer.startElement("div", gridRow);
+        writer.writeAttribute("class", buildStyleClass(gridRow), "styleClass");
     }
 
     @Override
@@ -43,10 +45,31 @@ public class GridRowRenderer extends Renderer {
         writer.endElement("div");
     }
 
+    private String buildStyleClass(GridRowUI gridRow) {
+        StringJoiner styleClass = new StringJoiner(" ");
+        if (gridRow.getStyleClass() != null) {
+            styleClass.add(gridRow.getStyleClass());
+        }
+        if (gridRow.getSmallUncollapse()) {
+            styleClass.add("small-uncollapse");
+        }
+        if (gridRow.getMediumUncollapse()) {
+            styleClass.add("medium-uncollapse");
+        }
+        if (gridRow.getLargeUncollapse()) {
+            styleClass.add("large-uncollapse");
+        }
+        if (gridRow.getMediumCollapse()) {
+            styleClass.add("medium-collapse");
+        }
+        if (gridRow.getLargeCollapse()) {
+            styleClass.add("large-collapse");
+        }
+        return styleClass.toString();
+    }
+
     @Override
     public boolean getRendersChildren() {
         return true;
     }
-
-    
 }
