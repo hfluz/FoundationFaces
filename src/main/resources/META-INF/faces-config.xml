@@ -4,5 +4,11 @@
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
         http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd" 
               version="2.2">
-
+    <render-kit>
+        <renderer>
+            <component-family>javax.faces.Output</component-family>
+            <renderer-type>javax.faces.Body</renderer-type>
+            <renderer-class>org.foundation.faces.renderkit.BodyRenderer</renderer-class>
+        </renderer>
+    </render-kit>
 </faces-config>
