@@ -14,7 +14,7 @@ import javax.faces.component.UIPanel;
     @ResourceDependency(library = "foundation", name = "css/foundation-apps.min.css"),
     @ResourceDependency(library = "foundation", name = "js/angular.min.js"),
     @ResourceDependency(library = "foundation", name = "js/foundation-apps.min.js"),
-    @ResourceDependency(library = "foundation", name = "js/tabs.js")
+    @ResourceDependency(library = "foundation", name = "js/components/tabs.js")
 })
 @FacesComponent(value = "Tabs", tagName = "tabs", createTag = true, namespace = "http://foundation.faces.com/taglib")
 public class TabsUI extends UIPanel {

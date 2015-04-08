@@ -15,7 +15,7 @@ import javax.faces.component.UIPanel;
     @ResourceDependency(library = "foundation", name = "css/foundation-apps.min.css"),
     @ResourceDependency(library = "foundation", name = "js/angular.min.js"),
     @ResourceDependency(library = "foundation", name = "js/foundation-apps.min.js"),
-    @ResourceDependency(library = "foundation", name = "js/accordion/accordion.js")
+    @ResourceDependency(library = "foundation", name = "js/components/accordion.js")
 })
 @FacesComponent(value = "Accordion", tagName = "accordion", createTag = true, namespace = "http://foundation.faces.com/taglib")
 public class AccordionUI extends UIPanel {

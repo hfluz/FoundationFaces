@@ -14,13 +14,13 @@ import javax.faces.component.FacesComponent;
  * @author hfluz
  * @since 0.0.1
  */
-@ResourceDependencies({
-    @ResourceDependency(library = "foundation", name = "css/foundation.css", target = "head"),
-    @ResourceDependency(library = "foundation", name = "js/jquery.js", target = "body"),
-    @ResourceDependency(library = "foundation", name = "js/foundation.min.js", target = "body"),
-    @ResourceDependency(library = "foundation", name = "js/initializer.js", target = "body")
-})
-@FacesComponent("SplitButton")
+//@ResourceDependencies({
+//    @ResourceDependency(library = "foundation", name = "css/foundation.css", target = "head"),
+//    @ResourceDependency(library = "foundation", name = "js/jquery.js", target = "body"),
+//    @ResourceDependency(library = "foundation", name = "js/foundation.min.js", target = "body"),
+//    @ResourceDependency(library = "foundation", name = "js/initializer.js", target = "body")
+//})
+//@FacesComponent("SplitButton")
 public class SplitButtonUI extends ButtonUI {
 
     @Override

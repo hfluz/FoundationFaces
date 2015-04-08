@@ -33,6 +33,9 @@ public class BodyRenderer extends com.sun.faces.renderkit.html_basic.BodyRendere
             if (usedAngularModules.contains("tabs")) {
                 modules.add("'foundation.tabs'");
             }
+            if (usedAngularModules.contains("modal")) {
+                modules.add("'foundation.common','foundation.modal'");
+            }
             writer.write(modules.toString());
             writer.write("]);");
             writer.endElement("script");

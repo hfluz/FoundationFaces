@@ -14,7 +14,7 @@ import javax.faces.render.Renderer;
  * @author hfluz
  * @since 0.0.1
  */
-@FacesRenderer(componentFamily = "Button", rendererType = "SplitButton")
+//@FacesRenderer(componentFamily = "Button", rendererType = "SplitButton")
 public class SplitButtonRenderer extends Renderer {
 
     @Override
