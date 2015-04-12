@@ -45,9 +45,13 @@ public class ButtonRenderer extends Renderer {
     private String buildStyleClass(ButtonUI component) {
         List<String> styleClasses = new ArrayList<>();
         styleClasses.add("button");
+        if(component.getType() != null){
+            if(component.getType().toLowerCase().matches("secondary|success|alert|warning|info|dark")){
+                styleClasses.add(component.getType());
+            }
+        }
         if (component.getSize() != null) {
-            String allowedSizes = "tiny small large expand";
-            if (allowedSizes.contains(component.getSize())) {
+            if (component.getSize().matches("tiny|small|large|expand")) {
                 styleClasses.add(component.getSize());
             }
         }
@@ -56,6 +60,9 @@ public class ButtonRenderer extends Renderer {
             if (allowedCorners.contains(component.getCorner())) {
                 styleClasses.add(component.getCorner());
             }
+        }
+        if(component.isHollow()){
+            styleClasses.add("hollow");
         }
         if(component.isDisabled() != null && component.isDisabled()){
             styleClasses.add("disabled");

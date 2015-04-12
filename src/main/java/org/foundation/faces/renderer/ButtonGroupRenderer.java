@@ -57,20 +57,14 @@ public class ButtonGroupRenderer extends Renderer {
         if (component.getStyleClass() != null) {
             styleClasses.add(component.getStyleClass());
         }
-        if (component.isStackEnabled() != null && component.isStackEnabled()) {
-            if (component.getStackType() == null || component.getStackType().equals("stack")) {
-                styleClasses.add("stack");
-            } else if (component.getStackType().equals("stackForSmall")) {
-                styleClasses.add("stack-for-small");
-            }
-            if (component.getEven() != null && component.getEven().matches("even-[1-8]")) {
-                styleClasses.add(component.getEven());
+        if(component.getButtonType() != null){
+            if(component.getButtonType().toLowerCase().matches("secondary|success|alert|warning|info|dark")){
+                styleClasses.add(component.getButtonType());
             }
         }
-        if (component.getCorner() != null) {
-            String allowedCorners = "round radius";
-            if (allowedCorners.contains(component.getCorner())) {
-                styleClasses.add(component.getCorner());
+        if (component.getSize() != null) {
+            if (component.getSize().matches("tiny|small|large|expand")) {
+                styleClasses.add(component.getSize());
             }
         }
         return styleClasses.toString();

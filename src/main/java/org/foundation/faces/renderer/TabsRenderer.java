@@ -11,6 +11,7 @@ import org.foundation.faces.component.TabsUI;
 
 /**
  * Renderer for {@link TabsUI}
+ *
  * @author hfluz
  * @since 0.0.1
  */
@@ -22,14 +23,20 @@ public class TabsRenderer extends Renderer {
         ResponseWriter writer = context.getResponseWriter();
         TabsUI tabs = (TabsUI) component;
         writer.startElement("div", tabs);
+        if(tabs.getId() != null){
+            writer.writeAttribute("id", tabs.getId(), null);
+        }
         writer.writeAttribute("zf-tabs", "", null);
+        if (tabs.getDisplaced()) {
+            writer.writeAttribute("displaced", "true", null);
+        }
     }
 
     @Override
     public void encodeChildren(FacesContext context, UIComponent component) throws IOException {
         TabRenderer tabRenderer = new TabRenderer();
-        for(UIComponent innerComponent : component.getChildren()){
-            if(innerComponent instanceof TabUI){
+        for (UIComponent innerComponent : component.getChildren()) {
+            if (innerComponent instanceof TabUI) {
                 tabRenderer.encodeBegin(context, innerComponent);
                 tabRenderer.encodeChildren(context, innerComponent);
                 tabRenderer.encodeEnd(context, innerComponent);

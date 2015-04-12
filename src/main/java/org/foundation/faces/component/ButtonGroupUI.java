@@ -11,46 +11,56 @@ import javax.faces.component.UIPanel;
  * @since 0.0.1
  */
 @ResourceDependencies({
-    @ResourceDependency(library = "foundation", name = "css/foundation.css"),
+    @ResourceDependency(library = "foundation", name = "css/foundation-apps.min.css")
 })
-@FacesComponent("ButtonGroup")
+@FacesComponent(value = "ButtonGroup", tagName = "buttonGroup", createTag = true, namespace = "http://foundation.faces.com/taglib")
 public class ButtonGroupUI extends UIPanel {
 
     private enum PropertyKeys {
 
-        stackEnabled, stackType, even, corner, style, styleClass;
+        buttonType, size, style, styleClass;
     }
 
-    public Boolean isStackEnabled() {
-        return (Boolean) getStateHelper().eval(PropertyKeys.stackEnabled, null);
+    /**
+     * Type of style applied to nested buttons. Possible values are:
+     * <ul>
+     * <li>'primary'</li>
+     * <li>'secondary'</li>
+     * <li>'success'</li>
+     * <li>'alert'</li>
+     * <li>'warning'</li>
+     * <li>'info'</li>
+     * <li>'dark'</li>
+     * </ul>
+     * Default is 'primary'.
+     *
+     * @return
+     */
+    public String getButtonType() {
+        return (String) getStateHelper().eval(PropertyKeys.buttonType, null);
+    }
+    
+    public void setButtonType(String buttonType) {
+        getStateHelper().put(PropertyKeys.buttonType, buttonType);
+    }
+    
+    /**
+     * Size applied to button group. Possible values are:
+     * <ul>
+     * <li>'tiny'</li>
+     * <li>'small'</li>
+     * <li>'default'</li>
+     * <li>'large'</li>
+     * <li>'expand'</li>
+     * </ul>
+     * @return 
+     */
+    public String getSize() {
+        return (String) getStateHelper().eval(PropertyKeys.size, null);
     }
 
-    public void setStackEnabled(Boolean stackEnabled) {
-        getStateHelper().put(PropertyKeys.stackEnabled, stackEnabled);
-    }
-
-    public String getStackType() {
-        return (String) getStateHelper().eval(PropertyKeys.stackType, null);
-    }
-
-    public void setStackType(String stackType) {
-        getStateHelper().put(PropertyKeys.stackType, stackType);
-    }
-
-    public String getEven() {
-        return (String) getStateHelper().eval(PropertyKeys.even, null);
-    }
-
-    public void setEven(String even) {
-        getStateHelper().put(PropertyKeys.even, even);
-    }
-
-    public String getCorner() {
-        return (String) getStateHelper().eval(PropertyKeys.corner, null);
-    }
-
-    public void setCorner(String corner) {
-        getStateHelper().put(PropertyKeys.corner, corner);
+    public void setSize(String size) {
+        getStateHelper().put(PropertyKeys.size, size);
     }
 
     public String getStyle() {
