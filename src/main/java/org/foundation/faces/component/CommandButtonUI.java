@@ -1,11 +1,11 @@
-package org.foundation.faces.components;
+package org.foundation.faces.component;
 
 import java.io.IOException;
 import java.util.StringJoiner;
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.FacesComponent;
-import javax.faces.component.html.HtmlOutcomeTargetButton;
+import javax.faces.component.html.HtmlCommandButton;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
@@ -17,8 +17,8 @@ import javax.faces.context.ResponseWriter;
     @ResourceDependency(library = "foundation", name = "css/foundation.min.css")
 })
 @FacesComponent(createTag = true, namespace = "http://foundation.faces.com/taglib",
-        tagName = "button")
-public class ButtonUI extends HtmlOutcomeTargetButton {
+        tagName = "commandButton")
+public class CommandButtonUI extends HtmlCommandButton {
 
     enum PropertyKeys {
         sizing, expanded, coloring, hollow, disabled;
@@ -87,13 +87,5 @@ public class ButtonUI extends HtmlOutcomeTargetButton {
 
     public void setHollow(Boolean hollow) {
         getStateHelper().put(PropertyKeys.hollow, hollow);
-    }
-
-    public boolean isDisabled() {
-        return (Boolean) getStateHelper().eval(PropertyKeys.disabled, false);
-    }
-
-    public void setDisabled(boolean disabled) {
-        getStateHelper().put(PropertyKeys.disabled, disabled);
     }
 }

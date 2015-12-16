@@ -1,11 +1,13 @@
-package org.foundation.faces.components;
+package org.foundation.faces.component;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.StringJoiner;
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.FacesComponent;
-import javax.faces.component.html.HtmlCommandButton;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIPanel;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
@@ -17,24 +19,44 @@ import javax.faces.context.ResponseWriter;
     @ResourceDependency(library = "foundation", name = "css/foundation.min.css")
 })
 @FacesComponent(createTag = true, namespace = "http://foundation.faces.com/taglib",
-        tagName = "commandButton")
-public class CommandButtonUI extends HtmlCommandButton {
+        tagName = "buttonGroup")
+public class ButtonGroupUI extends UIPanel {
 
     enum PropertyKeys {
-        sizing, expanded, coloring, hollow, disabled;
+        styleClass, sizing, expanded, coloring, stackedFor;
     }
 
     @Override
     public void encodeBegin(FacesContext context) throws IOException {
         ResponseWriter writer = context.getResponseWriter();
-        this.setStyleClass(buildStyleClass());
-        setDisabled(false);
-        super.encodeBegin(context);
+        writer.startElement("div", this);
+        String styleClass = buildStyleClass();
+        if (getStyleClass() != null) {
+            styleClass = getStyleClass() + " " + styleClass;
+        }
+        writer.writeAttribute("class", styleClass, "styleClass");
+    }
+
+    @Override
+    public void encodeChildren(FacesContext context) throws IOException {
+        ResponseWriter writer = context.getResponseWriter();
+        List<UIComponent> innerComponents = getChildren();
+        for (UIComponent innerComponent : innerComponents) {
+            if (innerComponent instanceof ButtonUI || innerComponent instanceof CommandButtonUI) {
+                innerComponent.encodeEnd(context);
+            }
+        }
+    }
+
+    @Override
+    public void encodeEnd(FacesContext context) throws IOException {
+        ResponseWriter writer = context.getResponseWriter();
+        writer.endElement("div");
     }
 
     public String buildStyleClass() {
         StringJoiner styleClass = new StringJoiner(" ");
-        styleClass.add("button");
+        styleClass.add("button-group");
         if (getStyleClass() != null) {
             styleClass.add(getStyleClass());
         }
@@ -47,14 +69,18 @@ public class CommandButtonUI extends HtmlCommandButton {
         if (getColoring() != null && getColoring().matches("(.*)(secondary|success|alert|warning)(.*)")) {
             styleClass.add(getColoring());
         }
-        if (isHollow()) {
-            styleClass.add("hollow");
-        }
-
-        if (isDisabled()) {
-            styleClass.add("disabled");
+        if (getStackedFor() != null && getStackedFor().matches("(.*)(small|all)(.*)")) {
+            styleClass.add(getColoring());
         }
         return styleClass.toString();
+    }
+
+    public String getStyleClass() {
+        return (String) getStateHelper().eval(PropertyKeys.styleClass, null);
+    }
+
+    public void setStyleClass(String styleClass) {
+        getStateHelper().put(PropertyKeys.styleClass, styleClass);
     }
 
     public String getSizing() {
@@ -81,11 +107,12 @@ public class CommandButtonUI extends HtmlCommandButton {
         getStateHelper().put(PropertyKeys.coloring, coloring);
     }
 
-    public Boolean isHollow() {
-        return (Boolean) getStateHelper().eval(PropertyKeys.hollow, Boolean.FALSE);
+    public String getStackedFor() {
+        return (String) getStateHelper().eval(PropertyKeys.stackedFor, null);
     }
 
-    public void setHollow(Boolean hollow) {
-        getStateHelper().put(PropertyKeys.hollow, hollow);
+    public void setStackedFor(String stackedFor) {
+        getStateHelper().put(PropertyKeys.stackedFor, stackedFor);
     }
+
 }
